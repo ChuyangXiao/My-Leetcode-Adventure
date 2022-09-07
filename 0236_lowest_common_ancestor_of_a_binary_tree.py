@@ -15,32 +15,14 @@ Original file is located at
 #         self.right = None
 
 class Solution:
-
-    def fun(self, root, p, q):
-        if root:
-            
-            # if any node value is matching, return the node value
-            if root == p or root == q:
-                return root
-            
-            
-            left = self.fun(root.left, p, q)
-            right = self.fun(root.right, p, q)
-
-            # if both left and right are not null return the root 
-            # this root is the lowest common ancestor
-            
-            if left and right:
-                return root
-            
-            # if any of the left or right side has found a value return it
-            return left or right
-    
-    
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-
-        
-        out = self.fun(root, p, q)
-
-        # print(out)
-        return out
+        if root==None or root.val==p.val or root.val==q.val:
+            return root
+        left=self.lowestCommonAncestor(root.left,p,q)
+        right=self.lowestCommonAncestor(root.right,p,q)
+        if left!=None and right!=None:
+            return root
+        elif left!=None:
+            return left
+        else:
+            return right
